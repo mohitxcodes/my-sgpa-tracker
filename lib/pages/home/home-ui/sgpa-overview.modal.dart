@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SGPAOverview extends StatelessWidget {
   const SGPAOverview({super.key, required this.sgpa});
 
-  final double sgpa;
+  final String sgpa;
 
   @override
   Widget build(BuildContext context) {
