@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spga_cal/pages/home/home-ui/grade.dropdown.dart';
 import 'package:spga_cal/pages/home/home-ui/list-subjects.dart';
-import 'package:spga_cal/pages/home/home-ui/sgpa-overview.modal.dart';
 import 'package:spga_cal/pages/spg-dashboard/sgpa-dashboard.page.dart';
 
 class Subject {
@@ -74,7 +73,7 @@ class _HomePageState extends State<HomePage> {
           name: subjectNameController.text,
           credit: subjectCreditController.text,
           grade: gradeValue,
-          gradePoint: _findGradePoint(gradeValue),
+          gradePoint: findGradePoint(gradeValue),
         ),
       );
       subjectNameController.clear();
@@ -89,7 +88,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  String _findGradePoint(String gradeVal) {
+  String findGradePoint(String gradeVal) {
     if (gradeVal == "A+") {
       return "10";
     } else if (gradeVal == "A") {
@@ -120,8 +119,16 @@ class _HomePageState extends State<HomePage> {
     double sgpa = totalGradePoint / totalCredit;
 
     //Opening The SGPADashboard Page
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const SgpaDashboard()));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SgpaDashboard(
+                  sgpaValue: double.parse(sgpa.toStringAsFixed(2)),
+                  totalSubjects: _subjectData.length,
+                  totalCredits: totalCredit,
+                  averageGrade: totalGradePoint.toString(),
+                  subjectData: _subjectData,
+                )));
   }
 
   @override

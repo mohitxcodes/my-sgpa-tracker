@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:spga_cal/pages/home/home.page.dart';
 
 class SubjectCard extends StatelessWidget {
   SubjectCard({
     super.key,
-    required this.id,
-    required this.name,
-    required this.grade,
-    required this.credits,
-    required this.performance,
+    required this.subject,
   });
 
-  final int id;
-  final String name;
-  final String grade;
-  final int credits;
-  final String performance;
+  final Subject subject;
   Color _color = Colors.green;
+  String _performance = "";
+
+  void _getPerformance() {
+    int gradePoint = int.parse(subject.gradePoint);
+
+    if (gradePoint >= 8) {
+      _performance = "Excellent";
+      _color = Colors.green;
+    } else if (gradePoint >= 6) {
+      _performance = "Average";
+      _color = const Color.fromARGB(255, 202, 140, 7);
+    } else {
+      _performance = "Bad";
+      _color = Colors.red;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (performance == "Excellent") {
-      _color = Colors.green;
-    } else if (performance == "Average") {
-      _color = const Color.fromARGB(255, 202, 140, 7);
-    } else {
-      _color = Colors.red;
-    }
+    _getPerformance();
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -40,8 +43,8 @@ class SubjectCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                name,
-                style: TextStyle(
+                subject.name,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -55,7 +58,7 @@ class SubjectCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  performance,
+                  _performance,
                   style: TextStyle(
                     color: _color,
                     fontWeight: FontWeight.bold,
@@ -76,10 +79,10 @@ class SubjectCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
-                    "Grade : $grade",
+                    "Grade : ${subject.grade}",
                     style: TextStyle(color: Colors.grey.shade600),
                   )),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Container(
@@ -90,7 +93,7 @@ class SubjectCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
-                    "Credits : $credits",
+                    "Credits : ${subject.credit}",
                     style: TextStyle(color: Colors.grey.shade600),
                   )),
             ],

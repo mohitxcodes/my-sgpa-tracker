@@ -16,16 +16,17 @@ final List<String> gradeList = [
   'B',
   'C+',
   'C',
-  'D+',
   'D',
   'E',
-  'F'
+  'F',
+  'I'
 ];
 
 class _GradeDropdownState extends State<GradeDropdown> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      borderRadius: BorderRadius.circular(10),
       value: gradeList[0],
       items: gradeList
           .map(
@@ -47,7 +48,7 @@ class _GradeDropdownState extends State<GradeDropdown> {
           size: 20,
         ),
         label: const Text(
-          "Enter Grade Value",
+          "Select Grade",
           style: TextStyle(
             color: Colors.black,
           ),
