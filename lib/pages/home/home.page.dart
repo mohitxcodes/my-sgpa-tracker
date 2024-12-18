@@ -20,7 +20,8 @@ class Subject {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.name});
+  final String name;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -145,7 +146,10 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.bar_chart),
+            icon: const Icon(
+              Icons.settings,
+              size: 20,
+            ),
             onPressed: () {},
           ),
         ],
@@ -158,7 +162,66 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: Colors.grey[300]!,
+                        width: 1,
+                      ),
+                    ),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Hello, ",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey[700],
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.3,
+                            ),
+                          ),
+                          TextSpan(
+                            text: widget.name.toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.red[400],
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          const TextSpan(
+                            text: " 👋",
+                            style: TextStyle(
+                              fontSize: 22,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: const Text(
+                      "Enter Subject Details",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -282,7 +345,7 @@ class _HomePageState extends State<HomePage> {
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Add Details"),
+                          Text("Add Subject"),
                           SizedBox(width: 2),
                           Icon(
                             Icons.add,
@@ -295,8 +358,8 @@ class _HomePageState extends State<HomePage> {
                   // List of Subjects
                   SizedBox(
                     height: MediaQuery.of(context).viewInsets.bottom > 0
-                        ? MediaQuery.of(context).size.height * 0.28
-                        : MediaQuery.of(context).size.height * 0.58,
+                        ? MediaQuery.of(context).size.height * 0.18
+                        : MediaQuery.of(context).size.height * 0.48,
                     child: ListedSubjects(
                         subjectData: _subjectData,
                         removeSubjectData: _removeSubjectData),
@@ -312,7 +375,17 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ElevatedButton(
             onPressed: () {
-              _calculateSGPA();
+              if (_subjectData.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please add at least one subject'),
+                    backgroundColor: Colors.red,
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              } else {
+                _calculateSGPA();
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red[400],

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:spga_cal/pages/home/home.page.dart';
+import 'package:spga_cal/pages/loading-screen/widgets/getName-modal.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});
 
-  void navigateToHome(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+  void _openModal(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return GetNameModal();
+        });
   }
 
   @override
@@ -59,7 +62,9 @@ class LoadingPage extends StatelessWidget {
                     ),
                     // Get Started Button
                     ElevatedButton(
-                      onPressed: () => navigateToHome(context),
+                      onPressed: () {
+                        _openModal(context);
+                      },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 24, vertical: 12),
@@ -102,7 +107,7 @@ class LoadingPage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(12.0),
               child: Text(
-                "Copyright©2024 @mohitsinghx3. All rights reserved.",
+                "Copyright©2024.All rights reserved.",
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.black,

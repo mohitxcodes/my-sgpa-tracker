@@ -21,79 +21,124 @@ class _ListedSubjectsState extends State<ListedSubjects> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              "Added Subjects List",
+              "Added Subjects",
               style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.5,
               ),
             ),
-            TextButton(
+            TextButton.icon(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.red[400],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               onPressed: () {
                 setState(() {
                   widget.subjectData.clear();
                 });
               },
-              child: Text("Clear All"),
+              icon: const Icon(Icons.delete_sweep, size: 20),
+              label: const Text("Clear All"),
             ),
           ],
         ),
         const SizedBox(height: 20),
         Expanded(
           child: widget.subjectData.isEmpty
-              ? const Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "No Subject Is Added",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                    ),
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.library_books_outlined,
+                        size: 64,
+                        color: Colors.grey[400],
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        "No Subjects Added Yet",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
                   ),
                 )
               : ListView.builder(
                   itemCount: widget.subjectData.length,
                   itemBuilder: (context, index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${index + 1}. ${widget.subjectData[index].name}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        border: Border.symmetric(
+                            horizontal: BorderSide(
+                          color: Colors.grey[300]!,
+                          width: 2,
+                        )),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            "${index + 1}.",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "Credit : ${widget.subjectData[index].credit}",
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.subjectData[index].name.toUpperCase(),
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Credit: ${widget.subjectData[index].credit}",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.grey[600],
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Text(
+                                      "Grade: ${widget.subjectData[index].grade}",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.grey[600],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Text(
-                          "Grade : ${widget.subjectData[index].grade}",
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey,
+                          IconButton(
+                            onPressed: () {
+                              widget
+                                  .removeSubjectData(widget.subjectData[index]);
+                            },
+                            icon: Icon(
+                              Icons.delete_outline,
+                              size: 20,
+                              color: Colors.red[400],
+                            ),
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            widget.removeSubjectData(widget.subjectData[index]);
-                          },
-                          icon: Icon(
-                            Icons.delete,
-                            size: 18,
-                            color: Colors.red[400],
-                          ),
-                        )
-                      ],
+                        ],
+                      ),
                     );
                   },
                 ),

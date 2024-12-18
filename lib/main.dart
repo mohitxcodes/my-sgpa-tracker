@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spga_cal/pages/loading.page.dart';
+import 'package:spga_cal/pages/loading-screen/loading.page.dart';
 
 void main() {
   runApp(const MyApp());

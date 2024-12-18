@@ -16,6 +16,7 @@ class SubjectAnalytics extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Column(
         children: [
+          // ignore: prefer_const_constructors
           Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 8),
             child: const Row(
