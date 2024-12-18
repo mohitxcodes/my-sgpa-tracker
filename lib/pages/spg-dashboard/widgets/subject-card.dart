@@ -85,7 +85,7 @@ class SubjectCard extends StatelessWidget {
                         size: 16,
                         color: Colors.grey.shade600,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4,
                       ),
                       Text(
@@ -111,7 +111,7 @@ class SubjectCard extends StatelessWidget {
                         size: 16,
                         color: Colors.grey.shade600,
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
                         "Credits : ${subject.credit}",
                         style: TextStyle(color: Colors.grey.shade600),

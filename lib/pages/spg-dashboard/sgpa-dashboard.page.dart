@@ -103,8 +103,8 @@ class SgpaDashboard extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      "SGPA : ${sgpaValue}",
-                      style: TextStyle(
+                      "SGPA : $sgpaValue",
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 36,
                         fontWeight: FontWeight.bold,

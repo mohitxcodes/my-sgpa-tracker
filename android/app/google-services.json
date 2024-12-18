@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "442156169760",
+    "project_id": "my-sgpa-tracker",
+    "storage_bucket": "my-sgpa-tracker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442156169760:android:fd68aabb9e075b7336da45",
+        "android_client_info": {
+          "package_name": "com.example.spga_cal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYcy4gYxgCrNqIO3ULQnIBeCtG1ydEirg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

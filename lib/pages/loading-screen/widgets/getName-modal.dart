@@ -1,12 +1,20 @@
 import 'dart:ui';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:spga_cal/pages/home/home.page.dart';
 
-class GetNameModal extends StatelessWidget {
+class GetNameModal extends StatefulWidget {
   GetNameModal({super.key});
 
+  @override
+  State<GetNameModal> createState() => _GetNameModalState();
+}
+
+class _GetNameModalState extends State<GetNameModal> {
   final TextEditingController _nameController = TextEditingController();
+
+  final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
   void navigateToHome(BuildContext context) {
     Navigator.pushAndRemoveUntil(
@@ -17,6 +25,23 @@ class GetNameModal extends StatelessWidget {
               )),
       (route) => false,
     );
+  }
+
+  bool isLoading = false;
+
+  void addUserToDatabase(BuildContext context, String name) async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      await _database.child('users').set({'username': name});
+      setState(() {
+        isLoading = false;
+      });
+      navigateToHome(context);
+    } catch (e) {
+      print('Error adding user to database: $e');
+    }
   }
 
   @override
@@ -37,10 +62,10 @@ class GetNameModal extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             // ignore: prefer_const_literals_to_create_immutables
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.black26,
                 blurRadius: 10.0,
-                offset: const Offset(0.0, 10.0),
+                offset: Offset(0.0, 10.0),
               ),
             ],
           ),
@@ -77,7 +102,7 @@ class GetNameModal extends StatelessWidget {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.black,
                       width: 2,
                     ),
@@ -112,17 +137,22 @@ class GetNameModal extends StatelessWidget {
                     if (_nameController.text.isEmpty) {
                       return;
                     } else {
-                      navigateToHome(context);
+                      addUserToDatabase(context, _nameController.text);
                     }
                   },
-                  child: const Text(
-                    "Continue",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  child: isLoading
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        )
+                      : const Text(
+                          "Continue",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                 ),
               ),
             ],

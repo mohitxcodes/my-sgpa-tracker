@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/home/mohitsingh/code/flutter/spga_cal/linux"
+    "cmake.sourceDirectory": "/home/mohitsingh/code/flutter/spga_cal/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

@@ -1,7 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:spga_cal/pages/loading-screen/loading.page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  print("Connected to Firebase");
   runApp(const MyApp());
 }
 

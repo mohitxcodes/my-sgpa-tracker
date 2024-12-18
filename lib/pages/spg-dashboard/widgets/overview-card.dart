@@ -22,8 +22,8 @@ class OverViewCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "$title",
-            style: TextStyle(
+            title,
+            style: const TextStyle(
                 color: Colors.white60,
                 fontSize: 14,
                 fontWeight: FontWeight.bold),
