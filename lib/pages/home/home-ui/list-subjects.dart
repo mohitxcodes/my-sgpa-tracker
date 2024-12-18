@@ -76,11 +76,12 @@ class _ListedSubjectsState extends State<ListedSubjects> {
                       margin: const EdgeInsets.only(bottom: 8),
                       padding: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
-                        border: Border.symmetric(
-                            horizontal: BorderSide(
-                          color: Colors.grey[300]!,
-                          width: 2,
-                        )),
+                        border: BorderDirectional(
+                          bottom: BorderSide(
+                            color: Colors.grey[300]!,
+                            width: 2,
+                          ),
+                        ),
                       ),
                       child: Row(
                         children: [

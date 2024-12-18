@@ -13,7 +13,10 @@ class SubjectAnalytics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 16,
+      ),
       child: Column(
         children: [
           // ignore: prefer_const_constructors

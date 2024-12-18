@@ -69,36 +69,41 @@ class SgpaDashboard extends StatelessWidget {
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.white70,
-                            size: 20,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        const Text(
-                          "SGPA Overview",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white70,
+                                size: 20,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            const Text(
+                              "SGPA Overview",
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(width: 8),
                         const Icon(
-                          Icons.dashboard,
+                          Icons.info_outline,
                           color: Colors.white70,
-                          size: 14,
+                          size: 18,
                         ),
                       ],
                     ),
                     Text(
-                      "- SGPA : ${sgpaValue}",
+                      "SGPA : ${sgpaValue}",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 36,

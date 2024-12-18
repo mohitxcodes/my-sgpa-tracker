@@ -9,12 +9,14 @@ class GetNameModal extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
 
   void navigateToHome(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomePage(
-                  name: _nameController.text,
-                )));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+          builder: (context) => HomePage(
+                name: _nameController.text,
+              )),
+      (route) => false,
+    );
   }
 
   @override

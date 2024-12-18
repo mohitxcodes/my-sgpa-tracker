@@ -11,12 +11,13 @@ class Subject {
   final String gradePoint;
   final String grade;
 
-  Subject(
-      {required this.id,
-      required this.name,
-      required this.credit,
-      required this.gradePoint,
-      required this.grade});
+  Subject({
+    required this.id,
+    required this.name,
+    required this.credit,
+    required this.gradePoint,
+    required this.grade,
+  });
 }
 
 class HomePage extends StatefulWidget {
@@ -137,6 +138,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text(
           "MySGPA Tracker",
           style: TextStyle(
@@ -147,7 +149,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: const Icon(
-              Icons.settings,
+              Icons.info_outline,
               size: 20,
             ),
             onPressed: () {},

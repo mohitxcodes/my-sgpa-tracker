@@ -43,7 +43,7 @@ class SubjectCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                subject.name,
+                subject.name.toUpperCase(),
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,
@@ -78,9 +78,21 @@ class SubjectCard extends StatelessWidget {
                     border: Border.all(color: Colors.grey.shade400),
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Text(
-                    "Grade : ${subject.grade}",
-                    style: TextStyle(color: Colors.grey.shade600),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.grade_rounded,
+                        size: 16,
+                        color: Colors.grey.shade600,
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        "Grade : ${subject.grade}",
+                        style: TextStyle(color: Colors.grey.shade600),
+                      ),
+                    ],
                   )),
               const SizedBox(
                 width: 8,
@@ -92,9 +104,19 @@ class SubjectCard extends StatelessWidget {
                     border: Border.all(color: Colors.grey.shade400),
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Text(
-                    "Credits : ${subject.credit}",
-                    style: TextStyle(color: Colors.grey.shade600),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.credit_card_rounded,
+                        size: 16,
+                        color: Colors.grey.shade600,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        "Credits : ${subject.credit}",
+                        style: TextStyle(color: Colors.grey.shade600),
+                      ),
+                    ],
                   )),
             ],
           )
