@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spga_cal/pages/spg-dashboard/subject-analytics.dart';
 import 'package:spga_cal/pages/spg-dashboard/widgets/animated-header.dart';
 import 'package:spga_cal/pages/spg-dashboard/widgets/overview-card.dart';
 
@@ -8,8 +9,10 @@ class SgpaDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        AnimatedHeader(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          AnimatedHeader(
             height: 300,
             child: SafeArea(
               child: const Padding(
@@ -58,8 +61,13 @@ class SgpaDashboard extends StatelessWidget {
                   ],
                 ),
               ),
-            ))
-      ]),
+            ),
+          ),
+          Expanded(
+            child: SubjectAnalytics(),
+          ),
+        ],
+      ),
     );
   }
 }

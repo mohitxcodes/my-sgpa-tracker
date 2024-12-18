@@ -22,7 +22,8 @@ class _AnimatedHeaderState extends State<AnimatedHeader>
   late AnimationController _controller;
   late AnimationController _colorController;
   List<List<Color>> gradientSets = [
-    [Color(0xffFF5F6D), Color(0xffFFC371)],
+    [Colors.green, Colors.teal],
+    [Colors.blue, Colors.purple],
   ];
   int currentGradientIndex = 0;
 
