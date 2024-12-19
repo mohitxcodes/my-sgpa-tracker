@@ -34,7 +34,7 @@ class _GetNameModalState extends State<GetNameModal> {
       setState(() {
         isLoading = true;
       });
-      await _database.child('users').set({'username': name});
+      await _database.child('users').push().set({'username': name});
       setState(() {
         isLoading = false;
       });
@@ -143,7 +143,7 @@ class _GetNameModalState extends State<GetNameModal> {
                   child: isLoading
                       ? const CircularProgressIndicator(
                           color: Colors.white,
-                          strokeWidth: 2,
+                          strokeWidth: 3,
                         )
                       : const Text(
                           "Continue",
