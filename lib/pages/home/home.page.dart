@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spga_cal/pages/about-us/about-us.modal.dart';
 import 'package:spga_cal/pages/home/home-ui/grade.dropdown.dart';
 import 'package:spga_cal/pages/home/home-ui/list-subjects.dart';
 import 'package:spga_cal/pages/spg-dashboard/sgpa-dashboard.page.dart';
@@ -152,7 +153,12 @@ class _HomePageState extends State<HomePage> {
               Icons.info_outline,
               size: 20,
             ),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AboutUsModal(),
+              );
+            },
           ),
         ],
       ),

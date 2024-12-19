@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spga_cal/pages/about-us/about-us.modal.dart';
 import 'package:spga_cal/pages/home/home.page.dart';
 import 'package:spga_cal/pages/spg-dashboard/subject-analytics.dart';
 import 'package:spga_cal/pages/spg-dashboard/widgets/animated-header.dart';
@@ -80,7 +81,7 @@ class SgpaDashboard extends StatelessWidget {
                               child: const Icon(
                                 Icons.arrow_back,
                                 color: Colors.white70,
-                                size: 20,
+                                size: 22,
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -95,10 +96,17 @@ class SgpaDashboard extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(width: 8),
-                        const Icon(
-                          Icons.info_outline,
-                          color: Colors.white70,
-                          size: 18,
+                        InkWell(
+                          child: const Icon(
+                            Icons.info_outline,
+                            color: Colors.white70,
+                            size: 24,
+                          ),
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AboutUsModal());
+                          },
                         ),
                       ],
                     ),
