@@ -41,6 +41,7 @@ class SubjectAnalytics extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
+              padding: const EdgeInsets.only(top: 8),
               itemCount: subjectData.length,
               itemBuilder: (context, index) {
                 return Padding(

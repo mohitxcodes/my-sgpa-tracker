@@ -25,7 +25,11 @@ class SubjectListHeader extends StatelessWidget {
             ),
           ),
           onPressed: () => onClear(),
-          icon: const Icon(Icons.delete_sweep, size: 20),
+          icon: Icon(
+            Icons.delete_sweep,
+            size: 20,
+            color: Colors.red[400],
+          ),
           label: const Text("Clear All"),
         ),
       ],

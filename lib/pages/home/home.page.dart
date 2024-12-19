@@ -253,6 +253,7 @@ class _HomePageState extends State<HomePage> {
                     Icon(
                       Icons.add,
                       size: 14,
+                      color: Colors.white,
                     ),
                   ],
                 )),
@@ -300,7 +301,17 @@ class _HomePageState extends State<HomePage> {
             ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text("Calculate SGPA"), Icon(Icons.calculate)],
+              children: [
+                Text("Calculate SGPA"),
+                SizedBox(
+                  width: 4,
+                ),
+                Icon(
+                  Icons.calculate,
+                  size: 14,
+                  color: Colors.white,
+                )
+              ],
             ),
           ),
         ),

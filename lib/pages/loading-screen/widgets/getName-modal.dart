@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_sgpa_tracker/pages/home/home.page.dart';
@@ -15,7 +15,7 @@ class GetNameModal extends StatefulWidget {
 class _GetNameModalState extends State<GetNameModal> {
   final TextEditingController _nameController = TextEditingController();
 
-  final DatabaseReference _database = FirebaseDatabase.instance.ref();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void navigateToHome(BuildContext context) {
     Navigator.pushAndRemoveUntil(
@@ -35,7 +35,12 @@ class _GetNameModalState extends State<GetNameModal> {
       setState(() {
         isLoading = true;
       });
-      await _database.child('users').push().set({'username': name});
+      await _firestore.collection('users').add(
+        {
+          'username': name,
+          'createdAt': Timestamp.now(),
+        },
+      );
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('username', name);
       setState(() {
@@ -43,7 +48,7 @@ class _GetNameModalState extends State<GetNameModal> {
       });
       navigateToHome(context);
     } catch (e) {
-      print('Error adding user to database: $e');
+      throw Exception('Error adding user to database: $e');
     }
   }
 

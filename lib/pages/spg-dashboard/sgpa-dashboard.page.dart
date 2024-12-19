@@ -53,7 +53,7 @@ class SgpaDashboard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               AnimatedHeader(
-                height: constraints.maxHeight * 0.4,
+                height: constraints.maxHeight * 0.45,
                 child: DashboardHeaderContent(
                   sgpaValue: sgpaValue,
                   totalSubjects: totalSubjects,
