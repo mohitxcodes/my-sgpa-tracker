@@ -2,9 +2,19 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AboutUsModal extends StatelessWidget {
   const AboutUsModal({super.key});
+
+  launch(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +87,11 @@ class AboutUsModal extends StatelessWidget {
                         vertical: 10,
                       ),
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           // Add your Facebook URL here
+                          await launch("https://github.com/mohitsinghx3");
                         },
-                        child: FaIcon(
+                        child: const FaIcon(
                           FontAwesomeIcons.xTwitter,
                           color: Colors.black,
                         ),

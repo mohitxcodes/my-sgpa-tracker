@@ -1,34 +1,24 @@
 import 'package:flutter/material.dart';
 
-class GradeDropdown extends StatefulWidget {
-  GradeDropdown({super.key, required this.setGradeValue});
+class GradeDropdown extends StatelessWidget {
+  final Function(String) onValueChange;
+  final String? value;
+  final String? label;
+  final List<String> items;
+  const GradeDropdown({
+    super.key,
+    required this.onValueChange,
+    this.value,
+    this.label,
+    required this.items,
+  });
 
-  Function(String) setGradeValue;
-
-  @override
-  State<GradeDropdown> createState() => _GradeDropdownState();
-}
-
-final List<String> gradeList = [
-  'A+',
-  'A',
-  'B+',
-  'B',
-  'C+',
-  'C',
-  'D',
-  'E',
-  'F',
-  'I'
-];
-
-class _GradeDropdownState extends State<GradeDropdown> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       borderRadius: BorderRadius.circular(10),
-      value: gradeList[0],
-      items: gradeList
+      value: value,
+      items: items
           .map(
             (e) => DropdownMenuItem(
               value: e,
@@ -37,19 +27,16 @@ class _GradeDropdownState extends State<GradeDropdown> {
           )
           .toList(),
       onChanged: (val) {
-        setState(() {
-          // Update the parent widget's controller value
-          widget.setGradeValue(val!);
-        });
+        onValueChange(val!);
       },
       decoration: InputDecoration(
         prefixIcon: const Icon(
           Icons.grade_outlined,
           size: 20,
         ),
-        label: const Text(
-          "Select Grade",
-          style: TextStyle(
+        label: Text(
+          label ?? "Select Grade",
+          style: const TextStyle(
             color: Colors.black,
           ),
         ),

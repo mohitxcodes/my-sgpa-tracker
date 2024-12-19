@@ -9,7 +9,7 @@ class OverViewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+      padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.symmetric(
         horizontal: 6,
       ),
@@ -25,13 +25,13 @@ class OverViewCard extends StatelessWidget {
             title,
             style: const TextStyle(
                 color: Colors.white60,
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: FontWeight.bold),
           ),
           Text(
-            "- $value",
+            value,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 15,
               color: Colors.white,
             ),
           ),

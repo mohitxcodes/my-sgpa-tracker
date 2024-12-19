@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spga_cal/pages/home/home.page.dart';
 import 'package:spga_cal/pages/loading-screen/widgets/getName-modal.dart';
 
-class LoadingPage extends StatelessWidget {
+class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
 
+  @override
+  State<LoadingPage> createState() => _LoadingPageState();
+}
+
+class _LoadingPageState extends State<LoadingPage> {
   void _openModal(BuildContext context) {
     showDialog(
         context: context,
@@ -12,56 +19,77 @@ class LoadingPage extends StatelessWidget {
         });
   }
 
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    checkAndValidateUser();
+  }
+
+  checkAndValidateUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? username = prefs.getString('username');
+    if (username != null) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage(name: username)),
+        (route) => false,
+      );
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/splash-img.jpg"),
-            fit: BoxFit.cover,
-            opacity: 0.7,
+      body: SafeArea(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/splash-img.jpg"),
+              fit: BoxFit.cover,
+              opacity: 0.7,
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            // The main content, centered (logo, title, and subtitle)
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Logo for loading
-                    Image.asset(
-                      "assets/images/loading-logo.jpg",
-                      width: 400,
-                    ),
-                    const SizedBox(
-                      height: 70,
-                    ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Spacer(),
+              // Logo for loading
+              Image.asset(
+                "assets/images/loading-logo.jpg",
+                width: 400,
+              ),
+              const SizedBox(height: 40),
 
-                    // Title for loading
-                    const Text(
-                      'MySGPA Tracker',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+              // Title for loading
+              const Text(
+                'MySGPA Tracker',
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
 
-                    // Subtitle for loading
-                    const Text(
-                      "Calculate SGPA Quickly In Few Steps",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // Get Started Button
-                    ElevatedButton(
+              // Subtitle for loading
+              const Text(
+                "Calculate SGPA Quickly In Few Steps",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+              // Get Started Button
+              isLoading
+                  ? const CircularProgressIndicator()
+                  : ElevatedButton(
                       onPressed: () {
                         _openModal(context);
                       },
@@ -98,23 +126,20 @@ class LoadingPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ],
+              // Copyright Text - This will be pushed to the bottom
+              Spacer(),
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Text(
+                  "Copyright©2024.All rights reserved.",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black,
+                  ),
                 ),
               ),
-            ),
-
-            // Copyright Text - This will be pushed to the bottom
-            const Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Text(
-                "Copyright©2024.All rights reserved.",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

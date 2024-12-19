@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spga_cal/pages/home/home.page.dart';
 
 class GetNameModal extends StatefulWidget {
@@ -35,6 +36,8 @@ class _GetNameModalState extends State<GetNameModal> {
         isLoading = true;
       });
       await _database.child('users').push().set({'username': name});
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('username', name);
       setState(() {
         isLoading = false;
       });

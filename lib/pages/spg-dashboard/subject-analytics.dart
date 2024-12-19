@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spga_cal/models/subject_item.model.dart';
 import 'package:spga_cal/pages/home/home.page.dart';
 import 'package:spga_cal/pages/spg-dashboard/widgets/subject-card.dart';
 
