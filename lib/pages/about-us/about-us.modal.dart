@@ -147,7 +147,7 @@ class AboutUsModal extends StatelessWidget {
                         onTap: () {
                           // Add your GitHub URL here
                         },
-                        child: FaIcon(
+                        child: const FaIcon(
                           FontAwesomeIcons.github,
                           color: Colors.black87,
                         ),

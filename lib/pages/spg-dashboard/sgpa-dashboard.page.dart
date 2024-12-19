@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:spga_cal/models/subject_item.model.dart';
-import 'package:spga_cal/pages/spg-dashboard/subject-analytics.dart';
-import 'package:spga_cal/pages/spg-dashboard/widgets/animated-header.dart';
-import 'package:spga_cal/pages/spg-dashboard/widgets/dashboard_header_content.dart';
+import 'package:my_sgpa_tracker/models/subject_item.model.dart';
+import 'package:my_sgpa_tracker/pages/spg-dashboard/subject-analytics.dart';
+import 'package:my_sgpa_tracker/pages/spg-dashboard/widgets/animated-header.dart';
+import 'package:my_sgpa_tracker/pages/spg-dashboard/widgets/dashboard_header_content.dart';
 
 class SgpaDashboard extends StatelessWidget {
   const SgpaDashboard({
@@ -23,7 +23,9 @@ class SgpaDashboard extends StatelessWidget {
   String _calculateAverageGrade() {
     final avgGradePoint = subjectData.isEmpty
         ? 0
-        : (subjectData.map((s) => int.parse(s.gradePoint)).reduce((a, b) => a + b) /
+        : (subjectData
+                    .map((s) => int.parse(s.gradePoint))
+                    .reduce((a, b) => a + b) /
                 subjectData.length)
             .round();
 
@@ -43,7 +45,7 @@ class SgpaDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final avgGrade = _calculateAverageGrade();
-    
+
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {

@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:spga_cal/pages/loading-screen/loading.page.dart';
+import 'package:my_sgpa_tracker/pages/loading-screen/loading.page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spga_cal/pages/home/home.page.dart';
-import 'package:spga_cal/pages/loading-screen/widgets/getName-modal.dart';
+import 'package:my_sgpa_tracker/pages/home/home.page.dart';
+import 'package:my_sgpa_tracker/pages/loading-screen/widgets/getName-modal.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
@@ -127,7 +127,7 @@ class _LoadingPageState extends State<LoadingPage> {
                       ),
                     ),
               // Copyright Text - This will be pushed to the bottom
-              Spacer(),
+              const Spacer(),
               const Padding(
                 padding: EdgeInsets.all(12.0),
                 child: Text(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:spga_cal/data/data.dart';
-import 'package:spga_cal/models/subject_item.model.dart';
-import 'package:spga_cal/pages/about-us/about-us.modal.dart';
-import 'package:spga_cal/pages/home/widgets/grade.dropdown.dart';
-import 'package:spga_cal/pages/home/widgets/list-subjects.dart';
-import 'package:spga_cal/pages/home/widgets/subject-list-header.widget.dart';
-import 'package:spga_cal/pages/spg-dashboard/sgpa-dashboard.page.dart';
-import 'package:spga_cal/widget.extension.dart';
+import 'package:my_sgpa_tracker/data/data.dart';
+import 'package:my_sgpa_tracker/models/subject_item.model.dart';
+import 'package:my_sgpa_tracker/pages/about-us/about-us.modal.dart';
+import 'package:my_sgpa_tracker/pages/home/widgets/grade.dropdown.dart';
+import 'package:my_sgpa_tracker/pages/home/widgets/list-subjects.dart';
+import 'package:my_sgpa_tracker/pages/home/widgets/subject-list-header.widget.dart';
+import 'package:my_sgpa_tracker/pages/spg-dashboard/sgpa-dashboard.page.dart';
+import 'package:my_sgpa_tracker/widget.extension.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.name});
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => AboutUsModal(),
+                builder: (context) => const AboutUsModal(),
               );
             },
           ),

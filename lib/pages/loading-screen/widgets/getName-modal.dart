@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spga_cal/pages/home/home.page.dart';
+import 'package:my_sgpa_tracker/pages/home/home.page.dart';
 
 class GetNameModal extends StatefulWidget {
-  GetNameModal({super.key});
+  const GetNameModal({super.key});
 
   @override
   State<GetNameModal> createState() => _GetNameModalState();
@@ -150,7 +150,7 @@ class _GetNameModalState extends State<GetNameModal> {
                         )
                       : const Text(
                           "Continue",
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,

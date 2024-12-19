@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:spga_cal/pages/about-us/about-us.modal.dart';
-import 'package:spga_cal/pages/spg-dashboard/widgets/overview-card.dart';
+import 'package:my_sgpa_tracker/pages/about-us/about-us.modal.dart';
+import 'package:my_sgpa_tracker/pages/spg-dashboard/widgets/overview-card.dart';
 
 class DashboardHeaderContent extends StatelessWidget {
   const DashboardHeaderContent({
