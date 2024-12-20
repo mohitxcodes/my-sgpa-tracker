@@ -17,6 +17,16 @@ A simple and intuitive SGPA (Semester Grade Point Average) calculator app built 
 ### Calculate SGPA
 ![Calculate SGPA](screenshots/calculate_sgpa.png)
 
+## Screenshots
+
+<div style="display: flex; gap: 10px;">
+
+  <img src="screenshots/home_screen.png" alt="Home Screen" width="300">
+  <img src="screenshots/calculate_sgpa.png" alt="Calculate SGPA" width="300">
+  <img src="screenshots/performance_tracking.png" alt="Performance Tracking" width="300">
+
+</div>
+
 
 
 ## Prerequisites
