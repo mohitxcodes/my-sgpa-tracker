@@ -1,16 +1,91 @@
-# spga_cal
+# SGPA Calculator App
 
-A new Flutter project.
+A simple and intuitive SGPA (Semester Grade Point Average) calculator app built using Flutter. This app allows students to calculate their SGPA by entering subject names, credits, and grades. It also helps track performance without requiring login or authorization.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Calculate SGPA by entering subject details.
+- Track your SGPA and performance over time.
+- No login or authorization required.
+- Simple and user-friendly interface.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<div style="display: flex; gap: 10px;">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  <img src="asscreenshots/home_screen.png" alt="Home Screen" width="300">
+  <img src="screenshots/calculate_sgpa.png" alt="Calculate SGPA" width="300">
+  <img src="screenshots/performance_tracking.png" alt="Performance Tracking" width="300">
+
+</div>
+
+
+
+## Prerequisites
+
+Ensure you have the following installed on your system:
+
+- Flutter SDK
+- Dart
+- A code editor like Visual Studio Code or Android Studio
+- Git
+
+## How to Clone and Run the Project
+
+### Step 1: Clone the Repository
+
+1. Open your terminal or command prompt.
+2. Run the following command to clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/my-sgpa-tracker.git
+   ```
+3. Navigate to the project directory:
+   ```bash
+   cd my-sgpa-tracker
+   ```
+
+### Step 2: Install Dependencies
+
+1. Run the following command to fetch the Flutter dependencies:
+   ```bash
+   flutter pub get
+   ```
+
+### Step 3: Run the App
+
+1. Connect a physical device or start an emulator.
+2. Use the following command to run the app:
+   ```bash
+   flutter run
+   ```
+
+## How to Use the App
+
+1. Open the SGPA Calculator app.
+2. Add the subject details:
+   - Enter the subject name.
+   - Enter the subject credit.
+   - Select the subject grade.
+3. Tap on the calculate button to see your SGPA.
+4. Track your performance over time.
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions or improvements, feel free to create a pull request or open an issue.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any queries or feedback, please contact:
+
+- **Name:** Mohit Singh
+- **Email:**  [msxconnect@gmail.com](mailto\:msxconnect@gmail.com)
+- **GitHub: @msxcodes**
+
+---
+
+Thank you for using SGPA Calculator App! Happy learning!
+
