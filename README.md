@@ -13,13 +13,12 @@ A simple and intuitive SGPA (Semester Grade Point Average) calculator app built 
 
 <div style="display: flex; gap: 10px;">
 
-  <img src="asscreenshots/home_screen.png" alt="Home Screen" width="300">
-  <img src="screenshots/calculate_sgpa.png" alt="Calculate SGPA" width="300">
-  <img src="screenshots/performance_tracking.png" alt="Performance Tracking" width="300">
+  <img src="assets/screenshots/ss1.png" alt="Loading Screen" width="300">
+  <img src="assets/screenshots/ss2.png" alt="Home Screen" width="300">
+  <img src="assets/screenshots/ss4.png" alt="Calculate SGPA" width="300">
+  <img src="assets/screenshots/ss6.png" alt="Modal Screen" width="300">
 
 </div>
-
-
 
 ## Prerequisites
 
@@ -82,10 +81,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For any queries or feedback, please contact:
 
 - **Name:** Mohit Singh
-- **Email:**  [msxconnect@gmail.com](mailto\:msxconnect@gmail.com)
+- **Email:**  [msxconnect@gmail.com](mailto:msxconnect@gmail.com)
 - **GitHub: @msxcodes**
 
 ---
 
 Thank you for using SGPA Calculator App! Happy learning!
-
