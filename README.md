@@ -13,7 +13,7 @@ A simple and intuitive SGPA (Semester Grade Point Average) calculator app built 
 
 <div style="display: flex; gap: 10px;">
 
-  <img src="assets/screenshots/ss1.png" alt="Loading Screen" width="300">
+  <img src="assets/screenshots/ss1.png" alt="Loading Screen" height="300" width="150">
   <img src="assets/screenshots/ss2.png" alt="Home Screen" width="300">
   <img src="assets/screenshots/ss4.png" alt="Calculate SGPA" width="300">
   <img src="assets/screenshots/ss6.png" alt="Modal Screen" width="300">
