@@ -2,21 +2,14 @@
 
 A simple and intuitive SGPA (Semester Grade Point Average) calculator app built using Flutter. This app allows students to calculate their SGPA by entering subject names, credits, and grades. It also helps track performance without requiring login or authorization.
 
-## Features
-
-- Calculate SGPA by entering subject details.
-- Track your SGPA and performance over time.
-- No login or authorization required.
-- Simple and user-friendly interface.
-
 ## Screenshots
 
 <div style="display: flex; gap: 10px;">
 
-  <img src="assets/screenshots/ss1.png" alt="Loading Screen" height="300" width="150">
-  <img src="assets/screenshots/ss2.png" alt="Home Screen" height="300" width="150">
-  <img src="assets/screenshots/ss4.png" alt="Calculate SGPA" height="300" width="150">
-  <img src="assets/screenshots/ss6.png" alt="Modal Screen" height="300" width="150">
+  <img src="assets/screenshots/ss1.png" style="border-radius: 20px;" alt="Loading Screen" height="300" width="150">
+  <img src="assets/screenshots/ss2.png" style="border-radius: 20px;" alt="Home Screen" height="300" width="150">
+  <img src="assets/screenshots/ss4.png" style="border-radius: 20px;" alt="Calculate SGPA" height="300" width="150">
+  <img src="assets/screenshots/ss6.png" style="border-radius: 20px;" alt="Modal Screen" height="300" width="150">
 
 </div>
 
