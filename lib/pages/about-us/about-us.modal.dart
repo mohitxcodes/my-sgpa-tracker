@@ -43,7 +43,7 @@ class AboutUsModal extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                "About Me",
+                "About Developer",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -89,7 +89,8 @@ class AboutUsModal extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           // Add your Facebook URL here
-                          await launch("https://github.com/mohitsinghx3");
+                          await launch(
+                              "https://x.com/mohitsinghx3?t=7TJVX_54u9rCR9d3Bf0TyA&s=09");
                         },
                         child: const FaIcon(
                           FontAwesomeIcons.xTwitter,
@@ -106,9 +107,15 @@ class AboutUsModal extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 12),
-                      child: FaIcon(
-                        FontAwesomeIcons.instagram,
-                        color: Colors.pink[400],
+                      child: GestureDetector(
+                        onTap: () {
+                          launch(
+                              "https://www.instagram.com/msxcodes/profilecard/?igsh=MXF0emtjeHN3N3F2ag==");
+                        },
+                        child: FaIcon(
+                          FontAwesomeIcons.instagram,
+                          color: Colors.pink[400],
+                        ),
                       ),
                     ),
                   ),
@@ -125,6 +132,8 @@ class AboutUsModal extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           // Add your LinkedIn URL here
+                          launch(
+                              "https://www.linkedin.com/in/msxcodes?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app");
                         },
                         child: FaIcon(
                           FontAwesomeIcons.linkedin,
@@ -146,6 +155,7 @@ class AboutUsModal extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           // Add your GitHub URL here
+                          launch("https://github.com/mohitsinghx3");
                         },
                         child: const FaIcon(
                           FontAwesomeIcons.github,

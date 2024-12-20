@@ -1,4 +1,4 @@
-package com.example.spga_cal
+package com.mohit.mysgpa_tracker
 
 import io.flutter.embedding.android.FlutterActivity
 
