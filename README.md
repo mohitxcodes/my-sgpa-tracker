@@ -29,7 +29,7 @@ Ensure you have the following installed on your system:
 1. Open your terminal or command prompt.
 2. Run the following command to clone the repository:
    ```bash
-   git clone https://github.com/yourusername/my-sgpa-tracker.git
+   git clone https://github.com/msxcodes/my-sgpa-tracker.git
    ```
 3. Navigate to the project directory:
    ```bash
