@@ -48,7 +48,7 @@ class DashboardHeaderContent extends StatelessWidget {
                           "SGPA Dashboard",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 22,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -56,7 +56,7 @@ class DashboardHeaderContent extends StatelessWidget {
                           "Track your academic progress",
                           style: TextStyle(
                             color: Colors.white70,
-                            fontSize: 14,
+                            fontSize: 12,
                           ),
                         ),
                       ],
@@ -80,7 +80,7 @@ class DashboardHeaderContent extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -115,7 +115,7 @@ class DashboardHeaderContent extends StatelessWidget {
                         "Your Semester SGPA",
                         style: TextStyle(
                           color: Colors.white70,
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -133,7 +133,7 @@ class DashboardHeaderContent extends StatelessWidget {
                                   ? Icons.trending_up
                                   : Icons.trending_down,
                               color: Colors.white,
-                              size: 16,
+                              size: 14,
                             ),
                             const SizedBox(width: 4),
                             Text(
@@ -158,7 +158,7 @@ class DashboardHeaderContent extends StatelessWidget {
                         sgpaValue.toString(),
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 56,
+                          fontSize: 40,
                           fontWeight: FontWeight.bold,
                           letterSpacing: -1,
                         ),
@@ -168,7 +168,7 @@ class DashboardHeaderContent extends StatelessWidget {
                         "/ 10.0",
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.7),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -177,7 +177,7 @@ class DashboardHeaderContent extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 10),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(

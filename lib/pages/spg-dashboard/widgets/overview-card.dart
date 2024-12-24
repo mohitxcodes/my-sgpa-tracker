@@ -46,7 +46,7 @@ class OverViewCard extends StatelessWidget {
             ),
             child: Icon(
               icon,
-              size: 20,
+              size: 14,
               color: Colors.white70,
             ),
           ),
@@ -55,7 +55,7 @@ class OverViewCard extends StatelessWidget {
             title,
             style: TextStyle(
               color: Colors.white.withOpacity(0.7),
-              fontSize: 14,
+              fontSize: 11,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -63,7 +63,7 @@ class OverViewCard extends StatelessWidget {
           Text(
             value,
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 15,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
