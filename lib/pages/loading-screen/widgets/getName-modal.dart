@@ -35,7 +35,7 @@ class _GetNameModalState extends State<GetNameModal> {
       setState(() {
         isLoading = true;
       });
-      await _firestore.collection('users').add(
+      await _firestore.collection('Registered Users').add(
         {
           'username': name,
           'createdAt': Timestamp.now(),

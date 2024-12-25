@@ -1,4 +1,4 @@
-package com.mohit.mysgpa_tracker
+package com.msxcodes.my_sgpa_tracker
 
 import io.flutter.embedding.android.FlutterActivity
 
