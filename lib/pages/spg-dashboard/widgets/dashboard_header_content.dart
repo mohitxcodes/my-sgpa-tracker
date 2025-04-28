@@ -140,7 +140,7 @@ class DashboardHeaderContent extends StatelessWidget {
                               sgpaValue >= 7.5
                                   ? "Excellent"
                                   : "Need Improvement",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,

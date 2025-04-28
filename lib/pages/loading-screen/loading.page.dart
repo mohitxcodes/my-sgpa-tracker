@@ -15,7 +15,7 @@ class _LoadingPageState extends State<LoadingPage> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return GetNameModal();
+          return const GetNameModal();
         });
   }
 
