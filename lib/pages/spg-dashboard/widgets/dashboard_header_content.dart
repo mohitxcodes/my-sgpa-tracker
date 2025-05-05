@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_sgpa_tracker/pages/about-us/about-us.modal.dart';
+import 'package:my_sgpa_tracker/pages/about-us/about_us_screen.dart';
 import 'package:my_sgpa_tracker/pages/spg-dashboard/widgets/overview-card.dart';
 
 class DashboardHeaderContent extends StatelessWidget {
@@ -73,7 +73,7 @@ class DashboardHeaderContent extends StatelessWidget {
                     onPressed: () {
                       showDialog(
                         context: context,
-                        builder: (context) => const AboutUsModal(),
+                        builder: (context) => const AboutUsScreen(),
                       );
                     },
                   ),

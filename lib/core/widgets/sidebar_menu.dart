@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:my_sgpa_tracker/pages/about-us/about-us.modal.dart';
+import 'package:my_sgpa_tracker/core/widgets/feedback_form.dart';
+import 'package:my_sgpa_tracker/pages/about-us/about_us_screen.dart';
 import 'package:my_sgpa_tracker/pages/spg-dashboard/sgpa-dashboard.page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SidebarMenu extends StatelessWidget {
   final Function onClose;
   final String userName;
+
+  Future<void> sendFeedbackEmail() async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: 'mohitxcodes@gmail.com',
+      queryParameters: {
+        'subject': 'App Feedback - MySGPA Tracker',
+        'body': 'Hi,\n\nI would like to share the following feedback:\n',
+      },
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      throw 'Could not launch email client';
+    }
+  }
 
   const SidebarMenu({
     Key? key,
@@ -155,7 +174,7 @@ class SidebarMenu extends StatelessWidget {
                     onClose();
                     showDialog(
                       context: context,
-                      builder: (context) => const AboutUsModal(),
+                      builder: (context) => const AboutUsScreen(),
                     );
                   },
                 ),
@@ -165,10 +184,10 @@ class SidebarMenu extends StatelessWidget {
                   title: 'Send Feedback',
                   onTap: () {
                     onClose();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Feedback option coming soon!'),
-                        backgroundColor: Colors.red,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FeedbackForm(name: userName),
                       ),
                     );
                   },

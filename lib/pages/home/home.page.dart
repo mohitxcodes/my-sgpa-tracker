@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_sgpa_tracker/core/widgets/sidebar_menu.dart';
 import 'package:my_sgpa_tracker/data/data.dart';
 import 'package:my_sgpa_tracker/models/subject_item.model.dart';
-import 'package:my_sgpa_tracker/pages/about-us/about-us.modal.dart';
+import 'package:my_sgpa_tracker/pages/about-us/about_us_screen.dart';
 import 'package:my_sgpa_tracker/pages/home/widgets/grade.dropdown.dart';
 import 'package:my_sgpa_tracker/pages/home/widgets/list-subjects.dart';
 import 'package:my_sgpa_tracker/pages/home/widgets/subject-list-header.widget.dart';
@@ -153,9 +153,11 @@ class _HomePageState extends State<HomePage>
                       size: 20,
                     ),
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => const AboutUsModal(),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AboutUsScreen(),
+                        ),
                       );
                     },
                   ),
