@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_sgpa_tracker/core/widgets/feedback_form.dart';
 import 'package:my_sgpa_tracker/pages/about-us/about_us_screen.dart';
-import 'package:my_sgpa_tracker/pages/spg-dashboard/sgpa-dashboard.page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SidebarMenu extends StatelessWidget {
@@ -184,12 +183,7 @@ class SidebarMenu extends StatelessWidget {
                   title: 'Send Feedback',
                   onTap: () {
                     onClose();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FeedbackForm(name: userName),
-                      ),
-                    );
+                    FeedbackForm.show(context, userName);
                   },
                 ),
                 _buildMenuItem(
