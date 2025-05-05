@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_sgpa_tracker/core/widgets/sidebar_menu.dart';
 import 'package:my_sgpa_tracker/data/data.dart';
 import 'package:my_sgpa_tracker/models/subject_item.model.dart';
 import 'package:my_sgpa_tracker/pages/about-us/about-us.modal.dart';
@@ -16,13 +17,16 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   final TextEditingController subjectNameController = TextEditingController();
   final TextEditingController subjectCreditController = TextEditingController();
   final List<Subject> _subjectData = [];
   String gradeValue = "";
   String? _errorTextName;
   String? _errorTextCredit;
+
+  bool isSidebarOpen = false;
 
   @override
   void initState() {
@@ -61,10 +65,14 @@ class _HomePageState extends State<HomePage> {
 
     if (subjectCreditController.text.isEmpty) {
       _errorTextCredit = "Subject Credit is required";
-    }
-
-    if (int.parse(subjectCreditController.text) > 10) {
-      _errorTextCredit = "Enter a valid credit";
+    } else if (subjectCreditController.text.isNotEmpty) {
+      try {
+        if (int.parse(subjectCreditController.text) > 10) {
+          _errorTextCredit = "Enter a valid credit";
+        }
+      } catch (e) {
+        _errorTextCredit = "Enter a valid number";
+      }
     }
 
     if (_errorTextName == null && _errorTextCredit == null) {
@@ -79,6 +87,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _toggleSidebarMenu() {
+    setState(() {
+      isSidebarOpen = !isSidebarOpen;
+    });
+  }
+
   void _calculateSGPA() {
     double totalGradePoint = 0;
     double totalCredit = 0;
@@ -89,7 +103,6 @@ class _HomePageState extends State<HomePage> {
     }
     double sgpa = totalGradePoint / totalCredit;
 
-    //Opening The SGPADashboard Page
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -109,212 +122,207 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          "MySGPA Tracker",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+      body: Stack(
+        children: [
+          // Main Content
+          Column(
+            children: [
+              // App Bar
+              AppBar(
+                backgroundColor: Colors.white,
+                title: const Center(
+                  child: Text(
+                    "MySGPA Tracker",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Icon(
+                    isSidebarOpen ? Icons.close : Icons.list,
+                    size: 24,
+                  ),
+                  onPressed: _toggleSidebarMenu,
+                ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.info_outline,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AboutUsModal(),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              // Main Content
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: const Text(
+                          "Enter Subject Details",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      context.customTextField(
+                        controller: subjectNameController,
+                        errorText: _errorTextName,
+                        labelText: "Subject Name",
+                        prefixIcon: Icons.subject,
+                        keyboardType: TextInputType.text,
+                        onChanged: (value) {},
+                        errorTextCredit: _errorTextName ?? "",
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: context.customTextField(
+                              controller: subjectCreditController,
+                              errorText: _errorTextCredit,
+                              labelText: "Subject Credit",
+                              prefixIcon: Icons.done_all,
+                              keyboardType: TextInputType.number,
+                              onChanged: (value) {},
+                              errorTextCredit: _errorTextCredit ?? "",
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: GradeDropdown(
+                              onValueChange: (p0) => gradeValue = p0,
+                              value: gradeValue,
+                              label: "Select Grade",
+                              items: AppData.gradeList,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (formValidation()) {
+                            addSubjectData();
+                          }
+                          setState(() {});
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red[400],
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Add Subject"),
+                            SizedBox(width: 2),
+                            Icon(
+                              Icons.add,
+                              size: 14,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SubjectListHeader(
+                        onClear: () => setState(() {
+                          _subjectData.clear();
+                        }),
+                      ),
+                      Expanded(
+                        child: ListedSubjects(
+                          subjectData: _subjectData,
+                          removeSubjectData: _removeSubjectData,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_subjectData.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content:
+                                      Text('Please add at least one subject'),
+                                  backgroundColor: Colors.red,
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            } else {
+                              _calculateSGPA();
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red[400],
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            minimumSize: const Size(double.infinity, 50),
+                          ),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Calculate SGPA"),
+                              SizedBox(width: 4),
+                              Icon(
+                                Icons.calculate,
+                                size: 14,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.info_outline,
-              size: 20,
+
+          // Sidebar overlay
+          if (isSidebarOpen)
+            GestureDetector(
+              onTap: _toggleSidebarMenu,
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.black.withOpacity(0.4),
+              ),
             ),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => const AboutUsModal(),
-              );
-            },
+
+          // Animated Sidebar
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            left: isSidebarOpen ? 0 : -MediaQuery.of(context).size.width * 0.65,
+            top: 0,
+            bottom: 0,
+            width: MediaQuery.of(context).size.width * 0.65,
+            child: SidebarMenu(
+              userName: widget.name,
+              onClose: _toggleSidebarMenu,
+            ),
           ),
         ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(
-                  color: Colors.grey[300]!,
-                  width: 1,
-                ),
-              ),
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Hello, ",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[700],
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.3,
-                      ),
-                    ),
-                    TextSpan(
-                      text: widget.name.toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.red[400],
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                    const TextSpan(
-                      text: " 👋",
-                      style: TextStyle(
-                        fontSize: 22,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: const Text(
-                "Enter Subject Details",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            context.customTextField(
-              controller: subjectNameController,
-              errorText: _errorTextName,
-              labelText: "Subject Name",
-              prefixIcon: Icons.subject,
-              keyboardType: TextInputType.text,
-              onChanged: (value) {},
-              errorTextCredit: _errorTextName ?? "",
-            ),
-            const SizedBox(height: 20),
-
-            // Row for Credits and Grade Text Fields
-            Row(
-              children: [
-                Expanded(
-                  child: context.customTextField(
-                    controller: subjectCreditController,
-                    errorText: _errorTextCredit,
-                    labelText: "Subject Credit",
-                    prefixIcon: Icons.done_all,
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) {},
-                    errorTextCredit: _errorTextCredit ?? "",
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: GradeDropdown(
-                    onValueChange: (p0) => gradeValue = p0,
-                    value: gradeValue,
-                    label: "Select Grade",
-                    items: AppData.gradeList,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  if (formValidation()) {
-                    addSubjectData();
-                  }
-
-                  setState(() {});
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[400],
-                  foregroundColor: Colors.white,
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Add Subject"),
-                    SizedBox(width: 2),
-                    Icon(
-                      Icons.add,
-                      size: 14,
-                      color: Colors.white,
-                    ),
-                  ],
-                )),
-
-            // Subject List Header
-            SubjectListHeader(
-              onClear: () => setState(() {
-                _subjectData.clear();
-              }),
-            ),
-            // List of Subjects
-            Expanded(
-              child: ListedSubjects(
-                subjectData: _subjectData,
-                removeSubjectData: _removeSubjectData,
-              ),
-            ),
-            const SizedBox(height: 50),
-          ],
-        ),
-      ),
-      bottomSheet: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ElevatedButton(
-            onPressed: () {
-              if (_subjectData.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Please add at least one subject'),
-                    backgroundColor: Colors.red,
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-              } else {
-                _calculateSGPA();
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red[400],
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Calculate SGPA"),
-                SizedBox(
-                  width: 4,
-                ),
-                Icon(
-                  Icons.calculate,
-                  size: 14,
-                  color: Colors.white,
-                )
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

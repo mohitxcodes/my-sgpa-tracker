@@ -1,0 +1,2 @@
+/Users/mohitsingh/code/my-sgpa-tracker/android/app/.cxx/Debug/1x6q3g26/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/mohitsingh/code/my-sgpa-tracker/android/app/.cxx/Debug/1x6q3g26/armeabi-v7a/CMakeFiles/rebuild_cache.dir

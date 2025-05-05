@@ -89,8 +89,7 @@ class AboutUsModal extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () async {
                           // Add your Facebook URL here
-                          await launch(
-                              "https://x.com/mohitsinghx3?t=7TJVX_54u9rCR9d3Bf0TyA&s=09");
+                          await launch("https://twitter.com/mohitxcodes");
                         },
                         child: const FaIcon(
                           FontAwesomeIcons.xTwitter,
@@ -109,8 +108,7 @@ class AboutUsModal extends StatelessWidget {
                           horizontal: 16.0, vertical: 12),
                       child: GestureDetector(
                         onTap: () {
-                          launch(
-                              "https://www.instagram.com/msxcodes/profilecard/?igsh=MXF0emtjeHN3N3F2ag==");
+                          launch("https://www.instagram.com/mohitxcodes/");
                         },
                         child: FaIcon(
                           FontAwesomeIcons.instagram,
@@ -132,8 +130,7 @@ class AboutUsModal extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           // Add your LinkedIn URL here
-                          launch(
-                              "https://www.linkedin.com/in/msxcodes?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app");
+                          launch("https://www.linkedin.com/in/mohitxcodes");
                         },
                         child: FaIcon(
                           FontAwesomeIcons.linkedin,
@@ -155,7 +152,7 @@ class AboutUsModal extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           // Add your GitHub URL here
-                          launch("https://github.com/mohitsinghx3");
+                          launch("https://github.com/mohitxcodes");
                         },
                         child: const FaIcon(
                           FontAwesomeIcons.github,
