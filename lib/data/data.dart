@@ -8,10 +8,5 @@ class AppData {
     'C',
     'D',
     'E',
-    'F',
-    'I'
   ];
-
-
-
 }

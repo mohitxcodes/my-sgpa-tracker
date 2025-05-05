@@ -154,19 +154,6 @@ class SidebarMenu extends StatelessWidget {
                   },
                 ),
                 _buildMenuItem(
-                  icon: Icons.analytics_rounded,
-                  title: 'Performance',
-                  onTap: () {
-                    onClose();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Performance analytics coming soon!'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  },
-                ),
-                _buildMenuItem(
                   icon: Icons.info_rounded,
                   title: 'About Us',
                   onTap: () {

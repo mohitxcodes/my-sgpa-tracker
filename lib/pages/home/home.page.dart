@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage>
                         controller: subjectNameController,
                         errorText: _errorTextName,
                         labelText: "Subject Name",
-                        prefixIcon: Icons.subject,
+                        prefixIcon: Icons.school,
                         keyboardType: TextInputType.text,
                         onChanged: (value) {},
                         errorTextCredit: _errorTextName ?? "",
@@ -201,7 +201,7 @@ class _HomePageState extends State<HomePage>
                               controller: subjectCreditController,
                               errorText: _errorTextCredit,
                               labelText: "Subject Credit",
-                              prefixIcon: Icons.done_all,
+                              prefixIcon: Icons.star,
                               keyboardType: TextInputType.number,
                               onChanged: (value) {},
                               errorTextCredit: _errorTextCredit ?? "",
@@ -243,6 +243,7 @@ class _HomePageState extends State<HomePage>
                           ],
                         ),
                       ),
+                      const SizedBox(height: 10),
                       SubjectListHeader(
                         onClear: () => setState(() {
                           _subjectData.clear();
