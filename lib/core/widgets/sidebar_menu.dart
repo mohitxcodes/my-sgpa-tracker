@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_sgpa_tracker/core/widgets/feedback_form.dart';
 import 'package:my_sgpa_tracker/pages/about-us/about_us_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:my_sgpa_tracker/pages/sgpa-history/sgpa-history.page.dart';
 
 class SidebarMenu extends StatelessWidget {
   final Function onClose;
@@ -145,10 +146,10 @@ class SidebarMenu extends StatelessWidget {
                   title: 'Past SGPAs',
                   onTap: () {
                     onClose();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Past SGPAs coming soon!'),
-                        backgroundColor: Colors.red,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HistoryPage(userName: userName),
                       ),
                     );
                   },

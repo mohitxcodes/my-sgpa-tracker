@@ -151,9 +151,7 @@ class _HomePageState extends State<HomePage>
 
       // Calculate average grade letter based on SGPA
       String averageGrade = "F";
-      if (formattedSGPA >= 9.5)
-        averageGrade = "O";
-      else if (formattedSGPA >= 8.5)
+      if (formattedSGPA >= 8.5)
         averageGrade = "A+";
       else if (formattedSGPA >= 7.5)
         averageGrade = "A";
