@@ -158,9 +158,11 @@ class SidebarMenu extends StatelessWidget {
                   title: 'About Us',
                   onTap: () {
                     onClose();
-                    showDialog(
-                      context: context,
-                      builder: (context) => const AboutUsScreen(),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AboutUsScreen(),
+                      ),
                     );
                   },
                 ),

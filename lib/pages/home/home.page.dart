@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_sgpa_tracker/core/widgets/sidebar_menu.dart';
 import 'package:my_sgpa_tracker/data/data.dart';
@@ -93,28 +94,115 @@ class _HomePageState extends State<HomePage>
     });
   }
 
-  void _calculateSGPA() {
-    double totalGradePoint = 0;
-    double totalCredit = 0;
-    for (var subject in _subjectData) {
-      totalGradePoint +=
-          double.parse(subject.gradePoint) * double.parse(subject.credit);
-      totalCredit += double.parse(subject.credit);
-    }
-    double sgpa = totalGradePoint / totalCredit;
+  Future<void> _saveSGPAHistory(double sgpa, List<Subject> subjectData,
+      double totalCredits, int totalSubjects, String averageGrade) async {
+    try {
+      // Convert Subject objects to a format Firebase can store
+      final List<Map<String, dynamic>> serializedSubjects =
+          subjectData.map((subject) {
+        return {
+          'id': subject.id,
+          'name': subject.name,
+          'credit': subject.credit,
+          'grade': subject.grade,
+          'gradePoint': subject.gradePoint,
+        };
+      }).toList();
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SgpaDashboard(
-          sgpaValue: double.parse(sgpa.toStringAsFixed(2)),
-          totalSubjects: _subjectData.length,
-          totalCredits: totalCredit,
-          averageGrade: totalGradePoint.toString(),
-          subjectData: _subjectData,
-        ),
-      ),
-    );
+      await FirebaseFirestore.instance
+          .collection("Registered Users")
+          .doc(widget.name)
+          .collection("sgpa_history")
+          .add({
+        "sgpa": sgpa,
+        "subject_data": serializedSubjects,
+        "total_credits": totalCredits,
+        "total_subjects": totalSubjects,
+        "average_grade": averageGrade,
+        "created_at": FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      // Show error to user if Firebase save fails
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to save SGPA history: ${e.toString()}'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+      // Re-throw to handle in calling function
+      rethrow;
+    }
+  }
+
+  Future<void> _calculateSGPA() async {
+    try {
+      double totalGradePoint = 0;
+      double totalCredit = 0;
+      for (var subject in _subjectData) {
+        totalGradePoint +=
+            double.parse(subject.gradePoint) * double.parse(subject.credit);
+        totalCredit += double.parse(subject.credit);
+      }
+      double sgpa = totalGradePoint / totalCredit;
+      final formattedSGPA = double.parse(sgpa.toStringAsFixed(2));
+
+      // Calculate average grade letter based on SGPA
+      String averageGrade = "F";
+      if (formattedSGPA >= 9.5)
+        averageGrade = "O";
+      else if (formattedSGPA >= 8.5)
+        averageGrade = "A+";
+      else if (formattedSGPA >= 7.5)
+        averageGrade = "A";
+      else if (formattedSGPA >= 6.5)
+        averageGrade = "B+";
+      else if (formattedSGPA >= 5.5)
+        averageGrade = "B";
+      else if (formattedSGPA >= 4.5)
+        averageGrade = "C";
+      else if (formattedSGPA >= 4.0)
+        averageGrade = "P";
+      else
+        averageGrade = "F";
+
+      // Save to Firebase first
+      await _saveSGPAHistory(
+        formattedSGPA,
+        _subjectData,
+        totalCredit,
+        _subjectData.length,
+        averageGrade,
+      );
+
+      // Only navigate if Firebase save was successful
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SgpaDashboard(
+              sgpaValue: formattedSGPA,
+              totalSubjects: _subjectData.length,
+              totalCredits: totalCredit,
+              averageGrade: averageGrade,
+              subjectData: _subjectData,
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error calculating SGPA: ${e.toString()}'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    }
   }
 
   @override
