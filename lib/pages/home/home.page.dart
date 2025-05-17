@@ -217,6 +217,9 @@ class _HomePageState extends State<HomePage>
               // App Bar
               AppBar(
                 backgroundColor: Colors.white,
+                elevation: 0,
+                scrolledUnderElevation: 0,
+                surfaceTintColor: Colors.white,
                 title: const Center(
                   child: Text(
                     "MySGPA Tracker",
