@@ -181,6 +181,7 @@ class _HomePageState extends State<HomePage>
           context,
           MaterialPageRoute(
             builder: (context) => SgpaDashboard(
+              userName: widget.name,
               sgpaValue: formattedSGPA,
               totalSubjects: _subjectData.length,
               totalCredits: totalCredit,

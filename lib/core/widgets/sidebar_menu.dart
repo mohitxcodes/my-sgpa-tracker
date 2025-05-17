@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_sgpa_tracker/core/widgets/feedback_form.dart';
 import 'package:my_sgpa_tracker/pages/about-us/about_us_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,6 +24,18 @@ class SidebarMenu extends StatelessWidget {
     } else {
       throw 'Could not launch email client';
     }
+  }
+
+  void shareApp(BuildContext context) {
+    const link =
+        'https://play.google.com/store/apps/details?id=com.msxcodes.my_sgpa_tracker';
+    Clipboard.setData(const ClipboardData(text: link));
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Link copied to clipboard!')),
+    );
+
+    onClose();
   }
 
   const SidebarMenu({
@@ -143,26 +156,13 @@ class SidebarMenu extends StatelessWidget {
                 ),
                 _buildMenuItem(
                   icon: Icons.calculate_rounded,
-                  title: 'Past SGPAs',
+                  title: 'SGPA History',
                   onTap: () {
                     onClose();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => HistoryPage(userName: userName),
-                      ),
-                    );
-                  },
-                ),
-                _buildMenuItem(
-                  icon: Icons.info_rounded,
-                  title: 'About Us',
-                  onTap: () {
-                    onClose();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AboutUsScreen(),
                       ),
                     );
                   },
@@ -180,11 +180,18 @@ class SidebarMenu extends StatelessWidget {
                   icon: Icons.share_rounded,
                   title: 'Share App',
                   onTap: () {
+                    shareApp(context);
+                  },
+                ),
+                _buildMenuItem(
+                  icon: Icons.info_rounded,
+                  title: 'About Us',
+                  onTap: () {
                     onClose();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Share feature coming soon!'),
-                        backgroundColor: Colors.red,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AboutUsScreen(),
                       ),
                     );
                   },

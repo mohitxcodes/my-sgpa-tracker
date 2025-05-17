@@ -1,19 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_sgpa_tracker/models/sgpa_history.modal.dart';
-import 'package:my_sgpa_tracker/pages/sgpa-history/widgets/welcome_header.dart';
 import 'package:my_sgpa_tracker/pages/sgpa-history/widgets/sgpa_history_card.dart';
-import 'package:my_sgpa_tracker/pages/sgpa-history/widgets/sgpa_details_sheet.dart';
 import 'package:intl/intl.dart';
 
-class HistoryPage extends StatelessWidget {
+class HistoryPage extends StatefulWidget {
   final String userName;
   const HistoryPage({super.key, required this.userName});
+
+  @override
+  State<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
+  late Future<List<SGPAHistory>> _historyFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _historyFuture = fetchSGPAHistory();
+  }
 
   Future<List<SGPAHistory>> fetchSGPAHistory() async {
     final snapshot = await FirebaseFirestore.instance
         .collection("Registered Users")
-        .doc(userName)
+        .doc(widget.userName)
         .collection("sgpa_history")
         .orderBy("created_at", descending: true)
         .get();
@@ -26,9 +37,16 @@ class HistoryPage extends StatelessWidget {
   Future<void> deleteHistoryItem(String id) async {
     try {
       await FirebaseFirestore.instance
-          .collection('sgpa_history')
+          .collection("Registered Users")
+          .doc(widget.userName)
+          .collection("sgpa_history")
           .doc(id)
           .delete();
+
+      // Refresh the history list after deletion
+      setState(() {
+        _historyFuture = fetchSGPAHistory();
+      });
     } catch (e) {
       rethrow;
     }
@@ -57,13 +75,18 @@ class HistoryPage extends StatelessWidget {
     if (confirmed == true) {
       final snapshot = await FirebaseFirestore.instance
           .collection("Registered Users")
-          .doc(userName)
+          .doc(widget.userName)
           .collection("sgpa_history")
           .get();
 
       for (var doc in snapshot.docs) {
         await doc.reference.delete();
       }
+
+      // Refresh the history list after clearing all
+      setState(() {
+        _historyFuture = fetchSGPAHistory();
+      });
     }
   }
 
@@ -89,15 +112,19 @@ class HistoryPage extends StatelessWidget {
   }
 
   Color getPerformanceColor(double sgpa) {
-    if (sgpa >= 8.0) return Colors.green;
-    if (sgpa >= 7.0) return Colors.amber;
+    if (sgpa >= 7.0) return Colors.green;
+    if (sgpa >= 6.0) return Colors.amber;
     return Colors.red;
   }
 
   String getPerformanceText(double sgpa) {
-    if (sgpa >= 8.0) return "Excellent";
-    if (sgpa >= 7.0) return "Average";
-    return "Needs Improvement";
+    if (sgpa >= 7.5) {
+      return "Excellent";
+    } else if (sgpa >= 6.0) {
+      return "Average";
+    } else {
+      return "Bad";
+    }
   }
 
   @override
@@ -112,13 +139,31 @@ class HistoryPage extends StatelessWidget {
           'SGPA History',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 16,
           ),
         ),
-        centerTitle: true,
+        actions: [
+          TextButton(
+            onPressed: () => clearAllHistory(context),
+            child: const Row(
+              children: [
+                Text(
+                  'Clear History',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                Icon(
+                  Icons.delete_forever_rounded,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: FutureBuilder<List<SGPAHistory>>(
-        future: fetchSGPAHistory(),
+        future: _historyFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -187,13 +232,13 @@ class HistoryPage extends StatelessWidget {
 
           return Column(
             children: [
-              WelcomeHeader(
-                userName: userName,
-                onClearHistory: () => clearAllHistory(context),
-              ),
               Expanded(
                 child: RefreshIndicator(
-                  onRefresh: () async => Future.value(),
+                  onRefresh: () async {
+                    setState(() {
+                      _historyFuture = fetchSGPAHistory();
+                    });
+                  },
                   child: ListView.builder(
                     padding: const EdgeInsets.all(16),
                     itemCount: historyList.length,

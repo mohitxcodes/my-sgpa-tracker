@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:my_sgpa_tracker/models/subject_item.model.dart';
 import 'package:my_sgpa_tracker/pages/spg-dashboard/widgets/subject-card.dart';
+import 'package:my_sgpa_tracker/pages/sgpa-history/sgpa-history.page.dart';
 
 class SubjectAnalytics extends StatelessWidget {
   const SubjectAnalytics({
     super.key,
     required this.subjectData,
+    required this.userName,
   });
 
   final List<Subject> subjectData;
-
+  final String userName;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,19 +24,42 @@ class SubjectAnalytics extends StatelessWidget {
           // ignore: prefer_const_constructors
           Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 8),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   "Subject Analytics",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                Icon(
-                  Icons.replay_outlined,
-                  size: 20,
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                HistoryPage(userName: userName),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "View History",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[800],
+                        ),
+                      ),
+                    ),
+                    const Icon(
+                      Icons.history_outlined,
+                      size: 20,
+                    ),
+                  ],
                 ),
               ],
             ),

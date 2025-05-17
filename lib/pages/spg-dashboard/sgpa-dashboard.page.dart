@@ -12,6 +12,7 @@ class SgpaDashboard extends StatelessWidget {
     required this.totalCredits,
     required this.averageGrade,
     required this.subjectData,
+    required this.userName,
   });
 
   final double sgpaValue;
@@ -19,7 +20,7 @@ class SgpaDashboard extends StatelessWidget {
   final double totalCredits;
   final String averageGrade;
   final List<Subject> subjectData;
-
+  final String userName;
   String _calculateAverageGrade() {
     final avgGradePoint = subjectData.isEmpty
         ? 0
@@ -64,6 +65,7 @@ class SgpaDashboard extends StatelessWidget {
               Expanded(
                 child: SubjectAnalytics(
                   subjectData: subjectData,
+                  userName: userName,
                 ),
               ),
             ],
